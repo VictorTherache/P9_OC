@@ -1,0 +1,33 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+{% load static %}
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<br>
+
+<div class="center-column">
+	<div>
+		<a class="btn btn-sm btn-info" href="{% url 'create_review' %}">Créer une critique</a>
+		<a class="btn btn-sm btn-info" href="{% url 'create_review' %}">Demander une critique</a>
+
+	</div>
+	<div class="todo-list">
+		{% for review in reviews %}
+		<div class="item-row">
+			<a class="btn btn-sm btn-info" href="{% url 'update_review' review.id %}">Update</a>
+			<a class="btn btn-sm btn-danger" href="{% url 'delete_review' review.id %}">Delete</a>
+			<p>{{review.title}}</p>
+			<p>{{review.star_rating}}</p>
+			<p>{{review.description}}</p>
+			<p>{{review.image_url}}</p>
+			<p>{{review.created}}</p>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
+</div>
