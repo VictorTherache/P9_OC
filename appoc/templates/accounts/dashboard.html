@@ -11,8 +11,8 @@
 
 <div class="center-column">
 	<div>
+		<a class="btn btn-sm btn-info" href="{% url 'create_ticket' %}">Demander une critique</a>
 		<a class="btn btn-sm btn-info" href="{% url 'create_review' %}">Créer une critique</a>
-		<a class="btn btn-sm btn-info" href="{% url 'create_review' %}">Demander une critique</a>
 
 	</div>
 	<div class="todo-list">
@@ -20,11 +20,24 @@
 		<div class="item-row">
 			<a class="btn btn-sm btn-info" href="{% url 'update_review' review.id %}">Update</a>
 			<a class="btn btn-sm btn-danger" href="{% url 'delete_review' review.id %}">Delete</a>
-			<p>{{review.title}}</p>
-			<p>{{review.star_rating}}</p>
-			<p>{{review.description}}</p>
-			<p>{{review.image_url}}</p>
+			<p>{{review.ticket.title}}</p>
+			<p>{{review.rating}}/5</p>
+			<p>{{review.headline}}</p>
+			<p>{{review.body}}</p>
+			<p>{{review.user}}</p>
 			<p>{{review.created}}</p>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="todo-list">
+		{% for ticket in tickets %}
+		<div class="item-row">
+			{% if ticket.image %}
+			<img src="{{ticket.image.url}}" alt="">
+			{% endif %}
+			<p>{{ticket.title}}</p>
+			<p>{{ticket.description}}</p>
+			<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' ticket.id %}">Répondre au ticket</a>
 		</div>
 		{% endfor %}
 	</div>

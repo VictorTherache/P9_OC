@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<form method="POST" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input class="btn btn-info" type="submit" name="Create Ticket">
+</form>

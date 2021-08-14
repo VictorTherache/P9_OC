@@ -1,7 +1,10 @@
+from appoc.create_ticket import TicketForm
+from appoc.create_review import ReviewForm
+
 from django.shortcuts import render
 
 # Create your views here.
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -17,15 +20,19 @@ from .models import *
 from .forms import CreateUserForm
 from .create_review import *
 
-def index(request):
+def dashboard(request):
 	reviews = Review.objects.all()
-	form = ReviewForm()
-	if request.method == 'POST':
-		form = ReviewForm(request.POST)
-		if form.is_valid():
-			form.save()
-		return redirect('/dashboard')
-	context = {'reviews':reviews, 'form':form}
+	tickets = Ticket.objects.all()
+	# for ticket in tickets:
+	# # 	if(ticket.image):
+	# 	print(ticket.image.url)
+	# form = ReviewForm()
+	# if request.method == 'POST':
+	# 	form = ReviewForm(request.POST)
+	# 	if form.is_valid():
+	# 		form.save()
+	# 	return redirect('/dashboard')
+	context = {'reviews':reviews, 'tickets':tickets}
 	return render(request, 'accounts/dashboard.html', context)
 
 def updateReview(request, pk):
@@ -39,15 +46,77 @@ def updateReview(request, pk):
 	context = {'form':form}
 	return render(request, 'accounts/update_review.html', context)
 
-def createReview(request):
-	form = ReviewForm()
-	context = {'form': form}
-	return render(request, 'accounts/create_review.html', context)
+def answerTicket(request, pk):
+	ticket = get_object_or_404(Ticket, pk=pk)
+	ticket = Ticket.objects.get(id=pk)
+	review_form = ReviewForm(request.POST or None)
+	context = {'ticket':ticket, 'review_form':review_form}
+	if request.method == 'POST':
+		if review_form.is_valid():
+			review = review_form.save(commit=False)
+			review.ticket = ticket
+			review.user = request.user
+			review_form.save()
+			return redirect('/dashboard')
+	return render(request, 'accounts/answer_ticket.html', context)
 
-def requestReview(request):
-	form = ReviewForm()
+def createReview(request):
+	print(request)
+	form = TicketForm(request.POST or None)
+	review_form = ReviewForm(request.POST or None)
+	if request.method == 'POST':
+		if form.is_valid():
+			ticket_form = form.save(commit=False)
+			ticket_form.user = request.user
+			ticket_form.save()
+	if request.method == 'POST':
+		print(review_form)	
+		if review_form.is_valid():
+			ticket = Ticket.objects.all().last()
+			review = review_form.save(commit=False)
+			review.user = request.user
+			review.ticket = ticket
+			review.save()
+			return redirect('/dashboard/')
+		else:
+			form = ReviewForm(request.POST)
+	context = {'form': form, 'review_form': review_form}
+	return render(request, 'accounts/create_review.html', context)
+	# if request.method == 'POST':
+	# 	ticket_form = TicketForm(request.POST)
+	# 	review_form = ReviewForm(request.POST)
+	# 	if ticket_form.is_valid() and review_form.is_valid():
+	# 		ticket_form.save()
+	# 		review_form.save()
+	# 		return redirect('/dashboard')        
+
+	# 	else:
+	# 		context = {
+	# 			'ticket_form': ticket_form,
+	# 			'review_form': review_form,
+	# 		}
+
+	# else:
+	# 	context = {
+	# 		'ticket_form': TicketForm(),
+	# 		'review_form': ReviewForm(),
+	# 	}
+	# return render(request, 'accounts/create_review.html', context)
+
+
+def createTicket(request):
+	form = TicketForm()
+	if request.method == 'POST':
+		form = TicketForm(request.POST, request.FILES)
+		if form.is_valid():
+			form_object = form.save(commit=False)
+			form_object.user = request.user
+			form_object.save()
+			return redirect('/dashboard')
+		else:
+			form = TicketForm(user=request.user)
 	context = {'form': form}
-	return render(request, 'accounts/request_review.html', context)
+	return render(request, 'accounts/create_ticket.html', context)
 
 def deleteReview(request, pk):
 	item = Review.objects.get(id=pk)

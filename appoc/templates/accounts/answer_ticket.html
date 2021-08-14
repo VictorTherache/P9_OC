@@ -1,0 +1,11 @@
+<h3>Répondre à la critique</h3>
+<h4>Vous faites une critique au ticket suivant : </h4>
+<p>Titre : {{ticket.title}}</p>
+<p>Description : {{ticket.description}}</p>
+<p> de {{ticket.user}}</p>
+<form method="POST" action="">
+    {% csrf_token %}
+    {{review_form}}
+    <input type="submit" name="Answer ticket">
+
+</form>
