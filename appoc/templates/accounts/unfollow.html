@@ -1,0 +1,8 @@
+<p>Are you sure you want to unfollow "{{relationship.followed_user}}"?</p>
+
+<a href="{% url 'abonnements' %}" >Cancel</a>
+
+<form method="POST">
+	{% csrf_token %}
+	<input type="submit" name="Confirm">
+</form></p>

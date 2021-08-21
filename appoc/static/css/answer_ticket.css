@@ -1,0 +1,14 @@
+.answer_global_div {
+    padding: 23px 50rem 30px 50rem;
+}
+.ticket_recap_div {
+    background-color: white;
+    padding: 2rem 2rem 3rem 4rem;
+    border-radius: 12px;
+}
+
+.ticket_recap_image_and_text {
+    display: flex;
+    justify-content: space-between;
+    width: 32rem;
+}

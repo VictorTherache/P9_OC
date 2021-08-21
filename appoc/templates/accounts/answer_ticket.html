@@ -1,11 +1,35 @@
-<h3>Répondre à la critique</h3>
-<h4>Vous faites une critique au ticket suivant : </h4>
-<p>Titre : {{ticket.title}}</p>
-<p>Description : {{ticket.description}}</p>
-<p> de {{ticket.user}}</p>
-<form method="POST" action="">
-    {% csrf_token %}
-    {{review_form}}
-    <input type="submit" name="Answer ticket">
+{% extends 'accounts/main.html' %}
 
-</form>
+{% block content %}
+
+{% include 'accounts/status.html' %}
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/answer_ticket.css' %}">
+<div class="answer_global_div">
+    <div class="ticket_recap_div">
+        <h3>Réponse à la critique : </h3>
+        <div class="ticket_recap_image_and_text">
+            <img src="{{ticket.image.url}}" alt="" class="book_img">
+            <div class="ticket_recap_text">
+                <p><strong>Titre :</strong> {{ticket.title}}</p>
+                <p><strong>Description :</strong> {{ticket.description}}</p>
+                <p> <strong>de</strong> {{ticket.user}}</p>
+                {% language 'fr' %}
+                <p> <strong>créer le </strong> {{ticket.time_created }}</p>
+                {% endlanguage %}
+            </div>
+        </div>
+
+    </div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{review_form}}
+        <input type="submit" name="Answer ticket">
+    
+    </form>
+</div>
+{% endblock %}

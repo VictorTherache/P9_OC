@@ -1,6 +1,11 @@
 
 	body{
-		background-color: #638CB8;
+		background-color: #C1C1C1;
+	}
+	
+	.book_img {
+		width: 100px;
+		height: 200px;
 	}
 
 	input{
@@ -28,7 +33,7 @@
 	}
 
 	.item-row{
-		background-color: #906abd;
+		background-color: lightslategrey;
 		margin: 10px;
 		padding: 20px;
 		border-radius: 3px;
@@ -41,3 +46,41 @@
 		background-color: #ffae19;
 		border-color: #e59400;
 	}
+
+.dashboard_ticket_answer_recap {
+    padding: 1rem 3rem 3rem 3rem;
+    background-color: white;
+    color: #616161;
+    border-radius: 6px;
+}
+
+.dashboard_user_date {
+	display: flex;
+    justify-content: space-between;
+}
+.review_title_rating {
+	display: flex;
+}
+
+.review_title {
+}
+
+.review_rating {
+}
+
+.space_title_rating {
+	width: 50px;
+}
+
+.dashboard_review_recap {
+	background-color: white;
+    color: #616161;
+    padding: 1rem 3rem 1rem 3rem;
+    border-radius: 6px;
+    margin-bottom: 22px;
+}
+
+.review_user_date {
+	display: flex;
+	justify-content: space-between;
+}

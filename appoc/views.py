@@ -1,3 +1,4 @@
+from appoc.follow_user import FollowUser
 from appoc.create_ticket import TicketForm
 from appoc.create_review import ReviewForm
 
@@ -14,6 +15,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 from .models import *
@@ -23,6 +25,14 @@ from .create_review import *
 def dashboard(request):
 	reviews = Review.objects.all()
 	tickets = Ticket.objects.all()
+	for ticket in tickets:
+		print(ticket.reviews)
+			# print(ticket.title)
+			# if review.ticket.id == ticket.id: 
+			# 	if (ticket.user == str(request.user.get_username())):
+			# 		css_value = 'hidden'
+			# 	else:
+			# 		css_value = ''
 	# for ticket in tickets:
 	# # 	if(ticket.image):
 	# 	print(ticket.image.url)
@@ -118,6 +128,21 @@ def createTicket(request):
 	context = {'form': form}
 	return render(request, 'accounts/create_ticket.html', context)
 
+def follow(request, pk):
+	print(pk)
+	relation = FollowUser()
+	if request.method == 'POST':
+		relation = FollowUser(request.POST)
+		if relation.is_valid():
+			relation_object = relation.save(commit=False)
+			relation_object.user = request.user
+			relation_object.save()
+			return redirect('abonnements')
+		else:
+			relation = FollowUser(user = request.user)
+	context = {'relation': relation, 'pk': pk}
+	return render(request, 'accounts/follow.html', context)
+
 def deleteReview(request, pk):
 	item = Review.objects.get(id=pk)
 
@@ -127,6 +152,18 @@ def deleteReview(request, pk):
 
 	context = {'item':item}
 	return render(request, 'accounts/delete_review.html', context)
+
+def unfollow(request, pk):
+	relationship = UserFollows.objects.get(id=pk)
+
+	if request.method == 'POST':
+		relationship.delete()
+		return redirect('abonnements')
+	context = {'relationship': relationship}
+	return render(request, 'accounts/unfollow.html', context)
+
+
+
 
 def registerPage(request):
 	if request.user.is_authenticated:
@@ -185,3 +222,46 @@ def home(request):
 	# 'pending':pending }
     context = {}
     return render(request, 'accounts/dashboard.html', context)
+
+def abonnements(request):
+	current_user = request.user
+	all_relationship = UserFollows.objects.all()
+	users = User.objects.values()
+	searched_users = []
+	my_follows = []
+	my_follows_str = []
+
+	is_he_following_me = []
+	for follower in all_relationship:
+		if follower.user == request.user:
+			my_follows.append(follower.followed_user)
+			my_follows_str.append(str(follower.followed_user))
+	if request.method == 'POST':
+		context = {'all_relationship': all_relationship, 
+			'my_follows_str':my_follows_str, 
+			'my_follows': my_follows,
+			'searched_users':searched_users, 
+			'current_user':current_user,
+			'is_he_following_me':is_he_following_me,}
+		name = request.POST['search_user']
+		for user in users:
+			if name in user['username']:
+				searched_users.append(str(user['username']))
+		for user in searched_users:
+			for follow in users:
+				if str(follow['username']) == str(user):
+					is_he_following_me.append([str(follow['username']), 1])
+				else:
+					is_he_following_me.append([str(follow['username']), 0])
+	print(type(my_follows[0]))
+	# if 'domi' in my_follows.values():
+	# 	print('VALIDE')
+	context = {'all_relationship': all_relationship, 
+				'my_follows_str':my_follows_str, 
+				'my_follows': my_follows,
+				'searched_users':searched_users, 
+				'current_user':current_user,
+				'is_he_following_me':is_he_following_me,}
+	return render(request, 'accounts/abonnements.html', context)
+
+# {% if relation.followed_user|stringformat:"i" == user|stringformat:"i" %}

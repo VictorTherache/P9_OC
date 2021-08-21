@@ -4,6 +4,7 @@
 
 {% include 'accounts/status.html' %}
 {% load static %}
+{% load i18n %}
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
@@ -18,25 +19,54 @@
 	<div class="todo-list">
 		{% for review in reviews %}
 		<div class="item-row">
+			<div class="review_user_date">
+				<p><strong>{{review.user}}</strong> à publié une critique</p>
+				{% language 'fr' %}
+				<p><strong>Le </strong>{{review.time_created}}</p>
+				{% endlanguage %}
+			</div>
+			<div class="dashboard_review_recap">
+				{{review.ticket.id}}
+				<div class="review_title_rating">
+					<p class="review_title">{{review.titre}}</p>
+					<div class="space_title_rating"></div>
+					<p class="review_rating">{{review.note}}/5</p>
+				</div>
+				<p><strong>Commentaire : </strong>{{review.commentaire}}</p>
+			</div>
+			<div class="dashboard_ticket_answer_recap">
+				<div class="dashboard_user_date">
+					<p>Ticket - {{review.ticket.user}}</p>
+					{% language 'fr' %}
+					<p><strong>Le </strong>{{review.time_created}}</p>
+					{% endlanguage %}
+				</div>
+				<p><strong>Titre : </strong>{{review.ticket.title}}</p>
+				<p><strong>Commentaire : </strong>{{review.ticket.description}}</p>
+				{% if review.ticket.image %}
+					<img src="{{review.ticket.image.url}}" alt="" class="book_img">
+				{% endif %}
+			</div>
 			<a class="btn btn-sm btn-info" href="{% url 'update_review' review.id %}">Update</a>
 			<a class="btn btn-sm btn-danger" href="{% url 'delete_review' review.id %}">Delete</a>
-			<p>{{review.ticket.title}}</p>
-			<p>{{review.rating}}/5</p>
-			<p>{{review.headline}}</p>
-			<p>{{review.body}}</p>
-			<p>{{review.user}}</p>
-			<p>{{review.created}}</p>
 		</div>
 		{% endfor %}
 	</div>
 	<div class="todo-list">
 		{% for ticket in tickets %}
 		<div class="item-row">
-			{% if ticket.image %}
-			<img src="{{ticket.image.url}}" alt="">
-			{% endif %}
-			<p>{{ticket.title}}</p>
-			<p>{{ticket.description}}</p>
+			<div class="review_user_date">
+				<p>{{ticket.user}} à demandé une critique</p>
+				<p><strong>Le </strong>{{ticket.time_created}}</p>
+			</div>
+			<div class="dashboard_review_recap">
+				<p class="review_title"><strong>Titre : </strong>{{ticket.title}}</p>
+				<p><strong>Commentaire : </strong>{{ticket.description}}</p>
+				{% if ticket.image %}
+				<img src="{{ticket.image.url}}" alt="" class="book_img">
+				{% endif %}
+			</div>
+			{{ticket.reviews}}
 			<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' ticket.id %}">Répondre au ticket</a>
 		</div>
 		{% endfor %}

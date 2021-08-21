@@ -1,0 +1,8 @@
+<p>Are you sure you want to follow {{pk}}?</p>
+
+<a href="{% url 'abonnements' %}" >Cancel</a>
+{{searched_user}}
+<form method="POST">
+	{% csrf_token %}
+	<input type="submit" name="Confirm">
+</form></p>
