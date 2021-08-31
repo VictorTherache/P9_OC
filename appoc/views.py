@@ -33,7 +33,6 @@ def dashboard(request):
     my_posts.sort(key=lambda r: r.time_created)
     my_posts = my_posts[::-1]
     my_posts = list(dict.fromkeys(my_posts))
-    print(my_posts)
     context = {'my_posts': my_posts}
     return render(request, 'accounts/dashboard.html', context)
 
