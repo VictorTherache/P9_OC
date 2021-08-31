@@ -16,6 +16,9 @@ Technologie utilisé :
 * [Django](https://www.djangoproject.com/)
 * [os.path](https://docs.python.org/3/library/os.path.html)
 * [bootstrap](https://getbootstrap.com/)
+* [Pillow](https://pillow.readthedocs.io/en/stable/)
+* [django-crispy-form](https://django-crispy-forms.readthedocs.io/en/latest/)
+
 ## Installation
 ***
 Pour ouvrir le site en local veuillez entrer les commandes ci-dessous :
