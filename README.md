@@ -1,4 +1,4 @@
-# P2_Therache_Victor
+# P9 Victor Thérache
 ## Table des matières
 1. [Information générale](#general-info)
 2. [Technologies](#technologies)
