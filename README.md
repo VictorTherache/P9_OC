@@ -42,6 +42,6 @@ $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 Accès faux comptes :  <br />
   -Id : Jeremie - mot de passe : mynewpassword <br />
   -Id : Kate - mot de passe : mynewpassword <br />
-  -Id : Kate - mot de passe : mynewpassword <br />
+  -Id : Laura - mot de passe : mynewpassword <br />
 
 Merci d'avoir téléchargé ce projet :) 
