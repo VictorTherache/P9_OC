@@ -32,7 +32,6 @@ def dashboard(request):
     for relation in relationships:
         if relation.user == request.user:
             my_follows.append(relation.followed_user)
-    my_follows.append(request.user)
     for post in all_posts:
         for follow in my_follows:
             if follow == post.user or post.user == request.user:

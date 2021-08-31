@@ -45,3 +45,7 @@
     width: 205px;
     justify-content: space-between;
 }
+
+.ticket_recap_text {
+    margin-top: 16px;
+}

@@ -32,8 +32,10 @@ body, html {
 
 .login_btn {
     width: 100%;
-    background: black !important;
-    color: white !important;
+    background: white !important;
+    color: darkslategrey;
+    font-size: 17px;
+    font-weight: 600;
 }
 .login_btn:focus {
     box-shadow: none !important;
@@ -62,5 +64,9 @@ body, html {
 }
 
 .pas_de_compte {
+    color: white;
+}
+
+.ml-2 {
     color: white;
 }

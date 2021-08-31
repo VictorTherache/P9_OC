@@ -24,7 +24,7 @@
         {% if searched_user in my_follows_str %}
             <a href="{% url 'unfollow' searched_user %}">Unfollow</a>
         {% else %}
-            <a href="{% url 'follow_user' searched_user %}">Follow</a>
+            <a href="{% url 'follow_user' searched_user %}" class="btn btn-sm btn-info">Follow</a>
         {% endif %}
     </div>
 </div>

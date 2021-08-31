@@ -46,7 +46,7 @@
 				<p><strong>Titre : </strong>{{post.ticket.title}}</p>
 				<p><strong>Commentaire : </strong>{{post.ticket.description}}</p>
 				{% if post.ticket.image %}
-				<img src="{{review.ticket.image.url}}" alt="" class="book_img">
+				<img src="{{post.ticket.image}}" alt="" class="book_img">
 				{% endif %}
 			</div>
 			{% if post.user|stringformat:"s" == user.get_username|stringformat:"s" %}
@@ -69,7 +69,7 @@
 					<p class="review_title"><strong>Titre : </strong>{{post.title}}</p>
 					<p><strong>Commentaire : </strong>{{post.description}}</p>
 					{% if post.image %}
-					<img src="{{ticket.image.url}}" alt="" class="book_img">
+					<img src="{{post.image}}" alt="" class="book_img">
 					{% endif %}
 				</div>
 				<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' post.id %}">Répondre au ticket</a>

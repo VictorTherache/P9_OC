@@ -1,9 +1,24 @@
-<p>Are you sure you want to follow {{pk}}?</p>
+{% extends 'accounts/main.html' %}
 
-<a href="{% url 'abonnements' %}" >Cancel</a>
-{{searched_user}}
-<form method="POST">
-	{% csrf_token %}
-	{{relation}}
-	<input type="submit" name="Confirm">
-</form></p>
+{% block content %}
+
+{% include 'accounts/status.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="unfollow_global_div">
+	<div class="card">
+		<div class="card-body">
+			<p>Are you sure you want to follow {{pk}}?</p>
+			<div class="unfollow_btn">
+				{{searched_user}}
+				<form method="POST">
+					{% csrf_token %}
+					{{relation}}
+					<input type="submit" name="Confirm" class="btn btn-sm btn-success" value="Oui">
+				</form>
+				<a href="{% url 'abonnements' %}"class="btn btn-sm btn-danger">Non</a>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}
