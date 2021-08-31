@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
 <div class="form_global_div">
 
-    <h3>Mettre à jour la critique</h3>
+    <h3>Update Ticket</h3>
 
     <form method="POST" action="">
         {% csrf_token %}
         {{form|crispy}}
-        <input type="submit" name="Update Review">
+        <input type="submit" name="Update Ticket">
 
     </form>
 </div>

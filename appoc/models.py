@@ -36,10 +36,11 @@ class Review(models.Model):
         # validates that rating must be between 0 and 5
         validators=[MinValueValidator(0), MaxValueValidator(5)], default=0)
     titre = models.CharField(max_length=128, default="")
-    commentaire = models.CharField(max_length=8192, blank=True)
+    commentaire = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default="")
     time_created = models.DateTimeField(auto_now_add=True)
+
 
 class UserFollows(models.Model):
     user = ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
@@ -47,9 +48,3 @@ class UserFollows(models.Model):
 
     class Meta:
         unique_together = ('user', 'followed_user')
-    
-    def get_followers(self):
-        pass
-    
-    def unfollow(self, id):
-        print(id)

@@ -24,18 +24,19 @@
 	}
 
 	.center-column{
-		width:600px;
+		width: 790px;
 		margin: 20px auto;
 		padding:20px;
-		background-color: #fff;
-		border-radius: 3px;
+		background-color: whitesmoke;
+		border-radius: 8px;
 		box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
 	}
 
 	.item-row{
 		background-color: lightslategrey;
+		margin-top: 23px !important;
 		margin: 10px;
-		padding: 20px;
+		padding: 37px 44px 25px 44px;
 		border-radius: 3px;
 		color: #fff;
 		font-size: 16px;
@@ -83,4 +84,26 @@
 .review_user_date {
 	display: flex;
 	justify-content: space-between;
+}
+
+.ask_review_create_review_buttons {
+	display: flex;
+    justify-content: space-between;
+}
+
+.todo-list {
+	margin-top: 22px;
+}
+
+.update_delete_buttons {
+    margin-top: 20px;
+    width: 15rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fil_title {
+    margin-bottom: 23px;
+    border-bottom: 2px solid darkslategray;
+    padding-bottom: 18px;
 }

@@ -8,13 +8,17 @@
 <div class="form_global_div">
 	<div class="sub_global_form">
 		<div class="are_you_sur_div">
-			<p>Êtes-vous sur de vouloir supprimer la critique ?</p>
+
+			<p>Êtes-vous sur de vouloir supprimer la demande de critique ?</p>
+
 			<div class="yes_no_button">
+				
 				<form method="POST" action="">
 					{% csrf_token %}
 					<input type="submit" name="Confirm" class="btn btn-info" value="Confirmer">
 				</form>
 				<a href="{% url 'dashboard' %}" class="btn btn-danger">Annuler</a>
+				</p>
 			</div>
 		</div>
 	</div>

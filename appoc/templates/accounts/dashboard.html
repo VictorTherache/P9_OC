@@ -11,66 +11,75 @@
 <br>
 
 <div class="center-column">
-	<div>
+	<h1 class="fil_title">Fil d'actualité</h1>
+	<div class="ask_review_create_review_buttons">
 		<a class="btn btn-sm btn-info" href="{% url 'create_ticket' %}">Demander une critique</a>
 		<a class="btn btn-sm btn-info" href="{% url 'create_review' %}">Créer une critique</a>
 
 	</div>
 	<div class="todo-list">
-		{% for review in reviews %}
+		{% for post in my_posts %}
+		{% if post.ticket %}
 		<div class="item-row">
 			<div class="review_user_date">
-				<p><strong>{{review.user}}</strong> à publié une critique</p>
+				<p><strong>{{post.user}}</strong> à publié une critique</p>
 				{% language 'fr' %}
-				<p><strong>Le </strong>{{review.time_created}}</p>
+				<p><strong>Le </strong>{{post.time_created}}</p>
 				{% endlanguage %}
 			</div>
 			<div class="dashboard_review_recap">
-				{{review.ticket.id}}
+				{{post.ticket.id}}
 				<div class="review_title_rating">
-					<p class="review_title">{{review.titre}}</p>
+					<p class="review_title">{{post.titre}}</p>
 					<div class="space_title_rating"></div>
-					<p class="review_rating">{{review.note}}/5</p>
+					<p class="review_rating">{{post.note}}/5</p>
 				</div>
-				<p><strong>Commentaire : </strong>{{review.commentaire}}</p>
+				<p><strong>Commentaire : </strong>{{post.commentaire}}</p>
 			</div>
 			<div class="dashboard_ticket_answer_recap">
 				<div class="dashboard_user_date">
-					<p>Ticket - {{review.ticket.user}}</p>
+					<p>Ticket - {{post.ticket.user}}</p>
 					{% language 'fr' %}
-					<p><strong>Le </strong>{{review.time_created}}</p>
+					<p><strong>Le </strong>{{post.time_created}}</p>
 					{% endlanguage %}
 				</div>
-				<p><strong>Titre : </strong>{{review.ticket.title}}</p>
-				<p><strong>Commentaire : </strong>{{review.ticket.description}}</p>
-				{% if review.ticket.image %}
-					<img src="{{review.ticket.image.url}}" alt="" class="book_img">
+				<p><strong>Titre : </strong>{{post.ticket.title}}</p>
+				<p><strong>Commentaire : </strong>{{post.ticket.description}}</p>
+				{% if post.ticket.image %}
+				<img src="{{review.ticket.image.url}}" alt="" class="book_img">
 				{% endif %}
 			</div>
-			<a class="btn btn-sm btn-info" href="{% url 'update_review' review.id %}">Update</a>
-			<a class="btn btn-sm btn-danger" href="{% url 'delete_review' review.id %}">Delete</a>
-		</div>
-		{% endfor %}
-	</div>
-	<div class="todo-list">
-		{% for ticket in tickets %}
-		<div class="item-row">
-			<div class="review_user_date">
-				<p>{{ticket.user}} à demandé une critique</p>
-				<p><strong>Le </strong>{{ticket.time_created}}</p>
+			{% if post.user|stringformat:"s" == user.get_username|stringformat:"s" %}
+			<div class="update_delete_buttons">
+				<a class="btn btn-sm btn-info" href="{% url 'update_review' post.id %}">Modifier</a>
+				<a class="btn btn-sm btn-danger" href="{% url 'delete_review' post.id %}">Supprimer</a>
 			</div>
-			<div class="dashboard_review_recap">
-				<p class="review_title"><strong>Titre : </strong>{{ticket.title}}</p>
-				<p><strong>Commentaire : </strong>{{ticket.description}}</p>
-				{% if ticket.image %}
-				<img src="{{ticket.image.url}}" alt="" class="book_img">
+			{% endif %}
+		</div>
+		{% else %}
+		<div class="todo-list">
+			<div class="item-row">
+				<div class="review_user_date">
+					<p><strong>{{post.user}}</strong> a demandé une critique</p>
+					{% language 'fr' %}
+					<p><strong>Le </strong>{{post.time_created}}</p>
+					{% endlanguage %}				
+				</div>
+				<div class="dashboard_review_recap">
+					<p class="review_title"><strong>Titre : </strong>{{post.title}}</p>
+					<p><strong>Commentaire : </strong>{{post.description}}</p>
+					{% if post.image %}
+					<img src="{{ticket.image.url}}" alt="" class="book_img">
+					{% endif %}
+				</div>
+				<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' post.id %}">Répondre au ticket</a>
+				{% if post.user|stringformat:"s" == user.get_username|stringformat:"s" %}
+					<a class="btn btn-sm btn-info" href="{% url 'update_ticket' post.id %}">Modifier</a>
+					<a class="btn btn-sm btn-danger" href="{% url 'delete_ticket' post.id %}">Supprimer</a>
 				{% endif %}
 			</div>
-			{{ticket.reviews}}
-			<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' ticket.id %}">Répondre au ticket</a>
 		</div>
+		{% endif %}
 		{% endfor %}
+		{% endblock %}
 	</div>
-</div>
-{% endblock %}
-</div>

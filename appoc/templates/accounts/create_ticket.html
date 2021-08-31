@@ -1,7 +1,19 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<form method="POST" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form}}
-    <input class="btn btn-info" type="submit" name="Create Ticket">
-</form>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="form_global_div">
+    <h1>Créer un ticket</h1>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <input class="btn btn-info" type="submit" name="Create Ticket">
+    </form>
+</div>
+{% endblock %}

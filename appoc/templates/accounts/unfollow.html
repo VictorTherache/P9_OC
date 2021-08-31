@@ -1,8 +1,22 @@
-<p>Are you sure you want to unfollow "{{relationship.followed_user}}"?</p>
+{% extends 'accounts/main.html' %}
 
-<a href="{% url 'abonnements' %}" >Cancel</a>
+{% block content %}
 
-<form method="POST">
-	{% csrf_token %}
-	<input type="submit" name="Confirm">
-</form></p>
+{% include 'accounts/status.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="unfollow_global_div">
+	<div class="card">
+		<div class="card-body">
+			<p>Êtes vous sur de vouloir unfollow {{relationship.followed_user}}?</p>
+			<div class="unfollow_btn">
+				<form method="POST">
+					{% csrf_token %}
+					<input type="submit" class="btn btn-sm btn-success" name="Oui" value="Oui">
+				</form>
+				<a href="{% url 'abonnements' %}" class="btn btn-sm btn-danger">Non</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,18 +1,20 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+{% include 'accounts/status.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<form method="POST" action="">
-    {% csrf_token %}
-    {{form}}
-    <p>Ticket</p>
-    {{review_form.ticket}}
-    <p>Rating</p>
-    {{review_form.rating}}
-    <p>Healine</p>
-    {{review_form.headline}}
-    <p>Body</p>
-    {{review_form.body}}
-    <p>User</p>
-    {{review_form.user}}
-
-    <input class="btn btn-info" type="submit" name="Create Review">
-</form>
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="form_global_div">
+    <h1>Créer une critique</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form|crispy}}
+        {{review_form|crispy}}
+        <input class="btn btn-info " type="submit" name="Create Review">
+    </form>
+</div>
+{% endblock %}

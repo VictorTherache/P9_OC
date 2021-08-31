@@ -6,5 +6,5 @@ from .models import *
 class FollowUser(forms.ModelForm):
     class Meta:
         model = UserFollows
-        fields = '__all__'
+        fields = []
 

@@ -4,7 +4,10 @@
 
 {% include 'accounts/status.html' %}
 {% load static %}
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/abonnements.css' %}">
+<br>
 <h1>Mes abonnements</h1>
 
 <form method="POST" class="form-inline">
@@ -21,7 +24,7 @@
         {% if searched_user in my_follows_str %}
             <a href="{% url 'unfollow' searched_user %}">Unfollow</a>
         {% else %}
-            <a href="{% url 'follow' searched_user %}">Follow</a>
+            <a href="{% url 'follow_user' searched_user %}">Follow</a>
         {% endif %}
     </div>
 </div>

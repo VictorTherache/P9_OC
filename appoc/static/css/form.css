@@ -1,0 +1,47 @@
+
+.form_sub_global {
+}
+
+.form_global_div {
+    margin: 0 auto;
+    width: 50rem;
+}
+
+.unfollow_btn{
+    display: flex;
+    width: 96px;
+    justify-content: space-between;
+}
+
+.unfollow_global_div {
+    margin-top: 20px;
+}
+.form_global_div {
+    display: flex;
+    flex-direction: column  ;
+}
+
+.sub_global_form {
+    background-color: white;
+    width: 74rem;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.ticket_recap_div {
+    margin-bottom: 28px;
+    border-bottom: 1px solid lightgray;
+}
+
+.are_you_sur_div{
+    background-color: #343a40 !important;
+    color: white;
+    padding: 29px;
+    border-radius: 8px;
+}
+
+.yes_no_button {
+    display: flex;
+    width: 205px;
+    justify-content: space-between;
+}
