@@ -39,4 +39,9 @@ $ python manage.py migrate
 $ python manage.py runserver
 $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 ```
+Accès faux comptes : 
+  -Id : Jeremie - mot de passe : mynewpassword
+  -Id : Kate - mot de passe : mynewpassword
+  -Id : Kate - mot de passe : mynewpassword
+
 Merci d'avoir téléchargé ce projet :) 
