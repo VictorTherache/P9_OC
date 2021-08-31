@@ -24,6 +24,7 @@ Sur Windows :
 $ git clone https://github.com/VictorTherache/P9_OC.git
 $ cd P9_OC/
 $ pip3 install -r requirements.txt 
+$ ./manage.py runserver
 $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 ```
 ```
@@ -31,6 +32,7 @@ Sur Linux/Mac :
 $ git clone https://github.com/VictorTherache/VictorTherache/P9_OC.git
 $ cd P9_OC/
 $ pip3 install -r requirements.txt 
+$ python3 manage.py runserver
 $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 ```
 Merci d'avoir téléchargé ce projet :) 
