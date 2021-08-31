@@ -1,7 +1,6 @@
 from django import forms
-from django.forms import ModelForm
+from .models import Ticket
 
-from .models import *
 
 class TicketForm(forms.ModelForm):
     class Meta:
