@@ -5,9 +5,11 @@
 {% include 'accounts/status.html' %}
 {% load static %}
 {% load i18n %}
+<link rel="stylesheet" type="text/css" href="{% static "fontawesome/css/all.min.css" %}" />
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
 <br>
 
 <div class="center-column">
@@ -28,11 +30,18 @@
 				{% endlanguage %}
 			</div>
 			<div class="dashboard_review_recap">
-				{{post.ticket.id}}
 				<div class="review_title_rating">
 					<p class="review_title">{{post.titre}}</p>
-					<div class="space_title_rating"></div>
-					<p class="review_rating">{{post.note}}/5</p>
+					<div class="space_title_rating">
+					</div>
+					{% for i in '01234'|make_list %}
+						{% if i|slugify < post.note|slugify %}
+						
+							<i class="fas fa-star"></i>
+						{% else %}
+							<i class="far fa-star"></i>
+						{% endif %} what we can see is that the environnement differs from a one to one relationship between the original ;an ahdn the 
+					{% endfor %}
 				</div>
 				<p><strong>Commentaire : </strong>{{post.commentaire}}</p>
 			</div>
@@ -63,7 +72,7 @@
 					<p><strong>{{post.user}}</strong> a demandé une critique</p>
 					{% language 'fr' %}
 					<p><strong>Le </strong>{{post.time_created}}</p>
-					{% endlanguage %}				
+					{% endlanguage %}
 				</div>
 				<div class="dashboard_review_recap">
 					<p class="review_title"><strong>Titre : </strong>{{post.title}}</p>
@@ -74,8 +83,8 @@
 				</div>
 				<a class="btn btn-sm btn-info" href="{% url 'answer_ticket' post.id %}">Répondre au ticket</a>
 				{% if post.user|stringformat:"s" == user.get_username|stringformat:"s" %}
-					<a class="btn btn-sm btn-info" href="{% url 'update_ticket' post.id %}">Modifier</a>
-					<a class="btn btn-sm btn-danger" href="{% url 'delete_ticket' post.id %}">Supprimer</a>
+				<a class="btn btn-sm btn-info" href="{% url 'update_ticket' post.id %}">Modifier</a>
+				<a class="btn btn-sm btn-danger" href="{% url 'delete_ticket' post.id %}">Supprimer</a>
 				{% endif %}
 			</div>
 		</div>
