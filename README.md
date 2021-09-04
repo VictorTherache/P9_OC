@@ -16,6 +16,9 @@ Technologie utilisé :
 * [Django](https://www.djangoproject.com/)
 * [os.path](https://docs.python.org/3/library/os.path.html)
 * [bootstrap](https://getbootstrap.com/)
+* [Pillow](https://pillow.readthedocs.io/en/stable/)
+* [django-crispy-form](https://django-crispy-forms.readthedocs.io/en/latest/)
+
 ## Installation
 ***
 Pour ouvrir le site en local veuillez entrer les commandes ci-dessous :
@@ -24,6 +27,8 @@ Sur Windows :
 $ git clone https://github.com/VictorTherache/P9_OC.git
 $ cd P9_OC/
 $ pip3 install -r requirements.txt 
+$ python manage.py makemigrations
+$ python manage.py migrate
 $ python manage.py runserver
 $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 ```
@@ -32,7 +37,14 @@ Sur Linux/Mac :
 $ git clone https://github.com/VictorTherache/VictorTherache/P9_OC.git
 $ cd P9_OC/
 $ pip3 install -r requirements.txt 
+$ python manage.py makemigrations
+$ python manage.py migrate
 $ python manage.py runserver
 $ Puis saisissez l'URL dans un navigateur : http://localhost:8000/login/
 ```
+Accès faux comptes :  <br />
+  -Id : Jeremie - mot de passe : mynewpassword <br />
+  -Id : Kate - mot de passe : mynewpassword <br />
+  -Id : Laura - mot de passe : mynewpassword <br />
+
 Merci d'avoir téléchargé ce projet :) 
