@@ -36,7 +36,6 @@
 					</div>
 					{% for i in '01234'|make_list %}
 						{% if i|slugify < post.note|slugify %}
-						
 							<i class="fas fa-star"></i>
 						{% else %}
 							<i class="far fa-star"></i>
