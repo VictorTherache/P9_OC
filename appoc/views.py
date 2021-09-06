@@ -27,9 +27,14 @@ def dashboard(request):
         if relation.user == request.user:
             my_follows.append(relation.followed_user)
     for post in all_posts:
+        if my_follows == []:
+            print('rien')
+            if post.user == request.user:
+                my_posts.append(post)
         for follow in my_follows:
             if follow == post.user or post.user == request.user:
                 my_posts.append(post)
+    print(post)
     my_posts.sort(key=lambda r: r.time_created)
     my_posts = my_posts[::-1]
     my_posts = list(dict.fromkeys(my_posts))
@@ -181,7 +186,7 @@ def registerPage(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
+                messages.success(request, 'Félicitations ! Le compte pour ' + user + ' a été créer')
                 return redirect('login')
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
