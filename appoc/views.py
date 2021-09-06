@@ -28,13 +28,11 @@ def dashboard(request):
             my_follows.append(relation.followed_user)
     for post in all_posts:
         if my_follows == []:
-            print('rien')
             if post.user == request.user:
                 my_posts.append(post)
         for follow in my_follows:
             if follow == post.user or post.user == request.user:
                 my_posts.append(post)
-    print(post)
     my_posts.sort(key=lambda r: r.time_created)
     my_posts = my_posts[::-1]
     my_posts = list(dict.fromkeys(my_posts))
